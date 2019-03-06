@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge"> <!-- † -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no">
+    <title>Leaderboard demo</title>
+
+</head>
+<body>
+
+	<h3>test posting</h3>
+
+	<button type="button" onclick="sendData()">Click Me!</button>
+
+
+    
+    <script>
+
+
+    var data = {'id':1, 'name':"Simon", 'score':123};
+    function sendData() {
+		  var XHR = new XMLHttpRequest();
+		  var FD  = new FormData();
+
+
+
+		  // Define what happens on successful data submission
+		  XHR.addEventListener('load', function(event) {
+		    console.log('Yeah! Data sent and response loaded.');
+		    data = JSON.parse(event.target.responseText)
+		    console.log("New ID:", data.id);
+		  });
+
+		  // Define what happens in case of error
+		  XHR.addEventListener('error', function(event) {
+		    console.log('Oops! Something went wrong.');
+		  });
+
+		  // Set up our request
+		  XHR.open('POST', 'list.php');
+		  XHR.setRequestHeader('Content-Type', 'application/json');
+
+
+		  // Send our FormData object; HTTP headers are set automatically
+		  XHR.send(JSON.stringify(data));
+		  console.log(FD);
+		}
+    
+
+    </script>
+    
+
+    
+</body>
+</html>
